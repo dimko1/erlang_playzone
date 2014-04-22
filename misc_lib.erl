@@ -26,14 +26,17 @@ for(I, Max, F) -> [F(I)|for(I+1, Max, F)].
 %% misc_lib:sum(L).
 %% 15
 %%--------------------------------------------------
-sum([H|T])->H+sum(T);
-sum([])->0.
+sum([H|T]) -> H + sum(T);
+sum([]) -> 0.
 
 %%--------------------------------------------------
 %%MAPPING FUNCTION TO THE LIST ELEMENTS
+%%Not required. Maybe for syntax purpose
 %%Usage:
-%% 
+%% L = [1, 4, 10].
+%% misc_lib:map(fun(X) -> 2 * X end, L).
+%% [2,8,20]
 %%--------------------------------------------------
-map(_, [])-> [];
-map(F, [H|T])->[F(H)|map(F, T)].
+map(F, L) -> [ F(H) || H <- L].
+
 
