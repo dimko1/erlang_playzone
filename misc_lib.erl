@@ -2,7 +2,7 @@
 %%Library with usefull functions
 %%--------------------------------------------------
 -module(misc_lib).
--export([for/3, sum/1, map/2]).
+-export([for/3, sum/1, map/2, qsort/1]).
 
 %%##################################################
 %%GENERAL FUNCTIONS
@@ -14,6 +14,18 @@
 for(Max,Max,F) -> [F(Max)];
 for(I, Max, F) -> [F(I)|for(I+1, Max, F)].
 
+
+%%--------------------------------------------------
+%%QUICK SORT
+%%Just for fun:
+%% single tweet function will look next:
+%% qs([])->[];qs([P|T])->qs([X||X<-T,X<P])++[P]++qs([X||X<-T,X>=P]).
+%%--------------------------------------------------
+qsort([]) -> [];
+qsort([Pivot|T])->
+	qsort([X || X <- T, X < Pivot])
+	++ [Pivot] ++
+	qsort([X || X <- T, X >= Pivot]).
 
 %%##################################################
 %%LIST FUNCTIONS
@@ -37,6 +49,6 @@ sum([]) -> 0.
 %% misc_lib:map(fun(X) -> 2 * X end, L).
 %% [2,8,20]
 %%--------------------------------------------------
-map(F, L) -> [ F(H) || H <- L].
+map(F,L) -> [ F(H) || H <- L].
 
 
